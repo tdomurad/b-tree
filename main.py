@@ -54,7 +54,9 @@ class BTree:
                 for key in node.keys:
                     if char < key:
                         self.insert(char, node.children[node.keys.index(key)])
-                self.insert(char, node.children[-1])
+                        break
+                if char > node.keys[-1]:
+                    self.insert(char, node.children[-1])
 
             else:
                 if node.length() < self.degree:
@@ -111,8 +113,11 @@ class BTree:
 
 
 tree = BTree(3)
-for i in range(23):
-    tree.insert(i)
+insert_numbers = [6, 19, 17, 11, 3, 12, 8, 20, 22, 23, 13, 18, 14, 16, 1, 2, 24, 25, 4, 26, 5, 7, 10]
+for number in insert_numbers:
+    tree.insert(number)
+
+
 tree.print_tree()
 
 if tree.search(5):
